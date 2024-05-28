@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 class Link(models.Model):
 	user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
 	url = models.URLField(unique=True)
-	short_url = models.URLField(unique=True)
+	short_code = models.URLField(unique=True)
 	title = models.CharField(max_length=255)
 	description = models.TextField(blank=True, null=True)
 	image = models.URLField(blank=True, null=True)
