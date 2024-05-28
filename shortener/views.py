@@ -7,7 +7,10 @@ def index(request):
 	if request.method == 'POST':
 		form = LinkForm(request.POST)
 		if form.is_valid():
-			form.save()
+			link = form.save(commit=False)
+			if request.user.is_authenticated:
+				link.user = request.user
+			link.save()
 			return redirect('index')
 	else:
 		form = LinkForm()

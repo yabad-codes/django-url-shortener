@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
-from .base62 import base62_encode, base62_decode
+from .base62 import base62_encode
+from django.utils import timezone
+from datetime import timedelta
 
 class Link(models.Model):
 	user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
@@ -20,4 +22,11 @@ class Link(models.Model):
 		super().save(*args, **kwargs)
 		if not self.short_code:
 			self.short_code = base62_encode(self.pk)
+			super().save(*args, **kwargs)
+		
+		if not self.destroyed_at:
+			if self.user is None:
+				self.destroyed_at = timezone.now() + timedelta(hours=1)
+			else:
+				self.destroyed_at = timezone.now() + timedelta(days=365)
 			super().save(*args, **kwargs)
