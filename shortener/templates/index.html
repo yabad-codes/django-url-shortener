@@ -7,16 +7,24 @@
   </head>
   <body>
     <div class="container">
-      <h1>URL Shortener</h1>
-      <form method="post">
-        {% csrf_token %} {{ form.as_p }}
-        <button type="submit">Save</button>
-      </form>
-      <div class="url-list">
-        <h2>Saved URLs</h2>
+      <div class="url-add">
+        <h1>URL Shortener</h1>
+        <form method="post">
+          {% csrf_token %} {{ form.as_p }}
+          <button type="submit">Save</button>
+        </form>
+      </div>
+      <div class="url-display">
         <ul>
           {% for link in links %}
-          <li>{{ link.url }}</li>
+          <img src="{{ link.image }}" width="15" />
+          <li>
+            <a href="{% url 'redirect_view' short_code=link.short_code %}"
+              >{{ link.url }}</a
+            >
+          </li>
+          <button>{{ link.views_count }} views</button>
+          <button>copy</button>
           {% endfor %}
         </ul>
       </div>
