@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from .base62 import base62_encode, base62_decode
 
 class Link(models.Model):
 	user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
@@ -14,3 +15,9 @@ class Link(models.Model):
 
 	def __str__(self):
 		return self.short_url
+	
+	def save(self, *args, **kwargs):
+		super().save(*args, **kwargs)
+		if not self.short_code:
+			self.short_code = base62_encode(self.pk)
+			super().save(*args, **kwargs)
