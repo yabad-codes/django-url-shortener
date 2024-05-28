@@ -10,7 +10,7 @@ class Link(models.Model):
 	image = models.URLField(blank=True, null=True)
 	views_count = models.PositiveIntegerField(default=0)
 	created_at = models.DateTimeField(auto_now_add=True)
-	destroyed_at = models.DateTimeField()
+	destroyed_at = models.DateTimeField(blank=True, null=True)
 
 	def __str__(self):
 		return self.short_url

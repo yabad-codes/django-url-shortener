@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>URL Shortener</title>
+  </head>
+  <body>
+    <div class="container">
+      <h1>URL Shortener</h1>
+      <form method="post">
+        {% csrf_token %} {{ form.as_p }}
+        <button type="submit">Save</button>
+      </form>
+      <div class="url-list">
+        <h2>Saved URLs</h2>
+        <ul>
+          {% for link in links %}
+          <li>{{ link.url }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>
