@@ -41,7 +41,9 @@
               {% else %}
               <i class="fas fa-globe"></i>
               {% endif %}
-              <a href="{% url 'redirect_view' short_code=link.short_code %}"
+              <a
+                href="{% url 'redirect_view' short_code=link.short_code %}"
+                target="_blank"
                 >{{ link.title }}
                 <p>{{ link.description }}</p></a
               >

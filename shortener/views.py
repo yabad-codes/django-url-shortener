@@ -14,7 +14,7 @@ def index(request):
 			return redirect('index')
 	else:
 		form = LinkForm()
-	links = Link.objects.all()
+	links = Link.objects.all().order_by('created_at')
 	return render(request, 'index.html', {'form': form, 'links': links})
 
 def redirect_view(request, short_code):
