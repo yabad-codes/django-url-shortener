@@ -1,7 +1,7 @@
 from django.urls import path
-from .views import index, redirect_view
+from .views import home, redirect_view
 
 urlpatterns = [
-	path('', index, name='index'),
-	path('v/<str:short_code>/', redirect_view, name='redirect_view'),
+	path('home/', home, name='home'),
+	path('home/v/<str:short_code>/', redirect_view, name='redirect_view'),
 ]

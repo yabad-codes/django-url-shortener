@@ -1,0 +1,84 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20em;
+  width: 50%;
+  height: 45%;
+}
+
+.container .heading {
+  font-size: 40px;
+  font-weight: 800;
+  text-transform: uppercase;
+  padding: 2em 2em 0.5em 2em;
+  color: #474747;
+}
+
+h5 {
+  color: rgb(163, 161, 161);
+  font-size: small;
+  font-weight: 600;
+  letter-spacing: 1px;
+  padding-bottom: 3em;
+}
+
+.container form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 2em;
+}
+
+form .input-field {
+  border: 1px solid #474747;
+  border-radius: 5px;
+  padding: 1em 1em;
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 2em;
+  color: #474747;
+  outline: none;
+}
+
+form button {
+  padding: 1.1em 0px;
+  background-color: #474747;
+  color: white;
+  font-size: 16px;
+  font-weight: 500;
+  border: none;
+  border-radius: 5px;
+  transition: 0.3s all ease-in-out;
+}
+
+form button:hover {
+  background-color: white;
+  color: #474747;
+  border: 1px solid #474747;
+}
+
+form p {
+  font-size: large;
+  font-weight: 500;
+  color: #474747;
+  margin: 3em;
+}
+
+form p a {
+  text-decoration: none;
+  color: #5091e6;
+}

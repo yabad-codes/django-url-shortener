@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="{% static 'login.css' %}" />
+    <title>Signup</title>
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="heading">URL Shortener</h1>
+      <h5>signup</h5>
+      <form method="post">
+        {% csrf_token %} {{form.username}} {{form.password1}} {{form.password2}}
+        <button type="submit">Signup</button>
+        <p>
+          Doesn't have an account yet? <a href="{% url 'login' %}">Login</a>
+        </p>
+      </form>
+    </div>
+  </body>
+</html>
