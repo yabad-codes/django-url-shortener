@@ -99,7 +99,7 @@
 .url-display ul li .url-buttons {
   width: 25%;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
 }
 
@@ -112,6 +112,7 @@
   font-size: small;
   font-weight: 700;
   color: #474747;
+  margin-left: 1rem;
 }
 
 .copied {

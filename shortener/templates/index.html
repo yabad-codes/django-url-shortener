@@ -49,7 +49,9 @@
               >
             </div>
             <div class="url-buttons">
+              {% if request.user.is_authenticated %}
               <button>{{ link.views_count }} views</button>
+              {% endif %}
               <button
                 id="copy-btn{{ link.short_code }}"
                 onclick="clipboard('{{ link.short_code }}')"
