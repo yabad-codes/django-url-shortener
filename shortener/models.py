@@ -51,7 +51,7 @@ class Link(models.Model):
 						favicon_url = urljoin(self.url, favicon_url)
 					self.image = favicon_url
 			else:
-				self.image = ''
+				self.image = None
 		except requests.RequestException as e:
 			print(f"Error fetching metadata for URL {self.url}: {e}")
 		pass

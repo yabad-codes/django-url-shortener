@@ -1,8 +1,20 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <link rel="stylesheet" href="{% static 'styles.css' %}" />
     <title>URL Shortener</title>
   </head>
   <body>
@@ -10,24 +22,44 @@
       <div class="url-add">
         <h1>URL Shortener</h1>
         <form method="post">
-          {% csrf_token %} {{ form.as_p }}
-          <button type="submit">Save</button>
+          {% csrf_token %} {{ form.url }}
+          <button type="submit">shorten</button>
         </form>
       </div>
       <div class="url-display">
         <ul>
           {% for link in links %}
-          <img src="{{ link.image }}" width="15" />
           <li>
-            <a href="{% url 'redirect_view' short_code=link.short_code %}"
-              >{{ link.url }}</a
-            >
+            <div class="url">
+              <input
+                id="url-link{{ link.short_code }}"
+                hidden
+                value="http://localhost:8000/v/{{ link.short_code }}"
+              />
+              {% if link.image %}
+              <img src="{{ link.image }}" width="16" />
+              {% else %}
+              <i class="fas fa-globe"></i>
+              {% endif %}
+              <a href="{% url 'redirect_view' short_code=link.short_code %}"
+                >{{ link.title }}
+                <p>{{ link.description }}</p></a
+              >
+            </div>
+            <div class="url-buttons">
+              <button>{{ link.views_count }} views</button>
+              <button
+                id="copy-btn{{ link.short_code }}"
+                onclick="clipboard('{{ link.short_code }}')"
+              >
+                copy
+              </button>
+            </div>
           </li>
-          <button>{{ link.views_count }} views</button>
-          <button>copy</button>
           {% endfor %}
         </ul>
       </div>
     </div>
+    <script src="{% static 'app.js' %}"></script>
   </body>
 </html>
