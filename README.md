@@ -69,6 +69,12 @@ This project is a URL shortener application built with Django. Users can sign up
    ```bash
    git clone https://github.com/yabad-codes/django-url-shortener.git
    cd django-url-shortener
+   python -m venv virt
+   source virt/bin/activate
+   pip install django
+   pip install psycopg2-binary
+   pip install bs4
+   pip install requests
 2. **Setup the database:**
    ```bash
    docker run -d --name postgres-server -p 5432:5432 -e POSTGRES_PASSWORD=create_your_db_password postgres:latest
