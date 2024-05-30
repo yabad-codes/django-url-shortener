@@ -148,3 +148,47 @@
   color: white !important;
   transition: 0.3s all ease-in-out;
 }
+
+/* Stats Styling */
+
+.stats .all-links {
+  display: flex;
+  justify-content: space-between;
+}
+
+.stats .all-links a,
+.stats .all-links button {
+  border: none;
+  background-color: #f3f3f3;
+  padding: 1em 1.5em;
+  font-size: small;
+  font-weight: 600;
+  border-radius: 5px;
+  text-decoration: none;
+  color: #474747;
+}
+
+.stats .all-links button.views {
+  background-color: transparent;
+  margin-right: 1em;
+  border: none;
+  padding: 1em 1.5em;
+  font-size: small;
+  font-weight: 600;
+  border-radius: 5px;
+  color: #474747;
+}
+
+h1.url-title {
+  margin-top: 1.5em;
+  text-transform: lowercase;
+  text-decoration: none;
+}
+
+p.url-description {
+  color: gray;
+}
+
+.chart {
+  margin-top: 3em;
+}

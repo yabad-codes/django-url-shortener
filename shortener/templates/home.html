@@ -60,7 +60,18 @@
             </div>
             <div class="url-buttons">
               {% if request.user.is_authenticated %}
-              <button>{{ link.views_count }} views</button>
+              <button onclick="toStats('{{ link.short_code }}')">
+                {{ link.views_count }} views
+              </button>
+              <script>
+                function toStats(short_code) {
+                  var statsUrl = "{% url 'stats_view' 'PLACEHOLDER' %}".replace(
+                    'PLACEHOLDER',
+                    short_code
+                  );
+                  window.location.href = statsUrl;
+                }
+              </script>
               {% endif %}
               <button
                 id="copy-btn{{ link.short_code }}"

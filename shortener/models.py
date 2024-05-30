@@ -73,3 +73,7 @@ class Link(models.Model):
 			else:
 				self.destroyed_at = timezone.now() + timedelta(days=365)
 			super().save(*args, **kwargs)
+
+class Click(models.Model):
+	link = models.ForeignKey(Link, on_delete=models.CASCADE)
+	clicked_at = models.DateTimeField(auto_now_add=True)

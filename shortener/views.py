@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import LinkForm
-from .models import Link
+from .models import Link, Click
 from .base62 import base62_decode
 from django.contrib.auth.decorators import login_required
+from django.utils import timezone
+from datetime import timedelta
 
 @login_required(login_url='/login/')
 def home(request):
@@ -23,4 +25,27 @@ def redirect_view(request, short_code):
 	link = get_object_or_404(Link, pk=link_id)
 	link.views_count += 1
 	link.save()
+	Click.objects.create(link=link)
 	return redirect(link.url)
+
+def stats_view(request, short_code):
+	link_id = base62_decode(short_code)
+	link = get_object_or_404(Link, pk=link_id)
+
+	labels = [(timezone.now() - timedelta(days=i)).strftime("%b %d") for i in range(30, -1, -1)]
+	labels.reverse()
+
+	values = [0] * 31
+
+	last_30_days = timezone.now() - timedelta(days=30)
+	clicks = Click.objects.filter(link=link, clicked_at__gte=last_30_days)
+
+	for click in clicks:
+		day_index = (timezone.now() - click.clicked_at).days
+		values[30 - day_index] += 1
+	
+	data = {
+		"labels": labels,
+		"values": values
+	}
+	return render(request, 'stats.html', {'short_code': short_code, 'link': link, 'data': data})
