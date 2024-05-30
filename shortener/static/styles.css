@@ -53,6 +53,7 @@
   text-decoration: underline;
   text-transform: capitalize;
   color: #474747;
+  letter-spacing: 1px;
 }
 
 .url-add form {
@@ -81,6 +82,8 @@
   font-weight: 700;
   color: #474747;
   background-color: white;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 .url-display {
