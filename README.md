@@ -87,5 +87,3 @@ This project is a URL shortener application built with Django. Users can sign up
 6. **Launch app:**
    ```bash
    python manage.py runserver
-- see stats about the views
-- url got destroyed after 1 year
