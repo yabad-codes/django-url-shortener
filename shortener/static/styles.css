@@ -125,7 +125,7 @@
 }
 
 .url-display ul li .url-buttons {
-  width: 25%;
+  width: 40%;
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -141,6 +141,10 @@
   font-weight: 700;
   color: #474747;
   margin-left: 1rem;
+}
+
+.url-buttons i {
+  margin-left: 1.5em;
 }
 
 .copied {
@@ -191,4 +195,8 @@ p.url-description {
 
 .chart {
   margin-top: 3em;
+}
+
+button.trash {
+  background-color: transparent;
 }

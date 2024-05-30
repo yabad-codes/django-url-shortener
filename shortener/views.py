@@ -3,8 +3,10 @@ from .forms import LinkForm
 from .models import Link, Click
 from .base62 import base62_decode
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_protect
 from django.utils import timezone
 from datetime import timedelta
+from django.http import JsonResponse, HttpResponseForbidden
 
 @login_required(login_url='/login/')
 def home(request):
@@ -28,7 +30,7 @@ def redirect_view(request, short_code):
 	Click.objects.create(link=link)
 	return redirect(link.url)
 
-@login_required
+@login_required(login_url='/login/')
 def stats_view(request, short_code):
 	link_id = base62_decode(short_code)
 	link = get_object_or_404(Link, pk=link_id)
@@ -50,3 +52,12 @@ def stats_view(request, short_code):
 		"values": values
 	}
 	return render(request, 'stats.html', {'short_code': short_code, 'link': link, 'data': data})
+
+@csrf_protect
+@login_required(login_url='/login/')
+def delete_link(request, short_code):
+	link = get_object_or_404(Link, short_code=short_code)
+	if link.user != request.user:
+		return HttpResponseForbidden("You are not authorized to delete this link.")
+	link.delete()
+	return redirect('home')

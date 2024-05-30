@@ -79,6 +79,9 @@
               >
                 copy
               </button>
+              <a href="{% url 'delete_link' link.short_code %}">
+                <i class="fa-solid fa-trash" style="color: #ce383a"></i>
+              </a>
             </div>
           </li>
           {% endfor %}
