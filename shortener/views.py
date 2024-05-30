@@ -7,16 +7,21 @@ from django.views.decorators.csrf import csrf_protect
 from django.utils import timezone
 from datetime import timedelta
 from django.http import JsonResponse, HttpResponseForbidden
+from django.db import IntegrityError
+from django.contrib import messages
 
 @login_required(login_url='/login/')
 def home(request):
 	if request.method == 'POST':
 		form = LinkForm(request.POST)
 		if form.is_valid():
-			link = form.save(commit=False)
-			link.user = request.user
-			link.save()
-			return redirect('home')
+			try:
+				link = form.save(commit=False)
+				link.user = request.user
+				link.save()
+				return redirect('home')
+			except IntegrityError as e:
+				messages.error(request, 'This link already exists.')
 	else:
 		form = LinkForm()
 	links = Link.objects.filter(user=request.user).order_by('created_at')
