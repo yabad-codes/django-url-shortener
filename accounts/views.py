@@ -3,6 +3,8 @@ from .forms import SignupForm, LoginForm
 from django.contrib.auth import login, authenticate, logout
 
 def index(request):
+	if request.user.is_authenticated:
+		return redirect('home')
 	return render(request, 'index.html')
 
 def user_signup(request):

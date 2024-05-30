@@ -8,7 +8,7 @@ import requests
 
 class Link(models.Model):
 	user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
-	url = models.URLField(unique=True)
+	url = models.URLField()
 	short_code = models.CharField(max_length=10, unique=True)
 	title = models.CharField(max_length=255)
 	description = models.TextField(blank=True, null=True)
@@ -17,6 +17,9 @@ class Link(models.Model):
 	created_at = models.DateTimeField(auto_now_add=True)
 	destroyed_at = models.DateTimeField(blank=True, null=True)
 
+	class Meta:
+		unique_together = ('user', 'url')
+	
 	def __str__(self):
 		return self.short_url
 	

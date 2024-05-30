@@ -10,8 +10,7 @@ def home(request):
 		form = LinkForm(request.POST)
 		if form.is_valid():
 			link = form.save(commit=False)
-			if request.user.is_authenticated:
-				link.user = request.user
+			link.user = request.user
 			link.save()
 			return redirect('home')
 	else:

@@ -20,7 +20,17 @@
   <body>
     <div class="container">
       <div class="url-add">
-        <h1>URL Shortener</h1>
+        <div class="header">
+          <h1>URL Shortener</h1>
+          <div class="links">
+            {% if request.user.is_authenticated %}
+            <a href="{% url 'logout' %}">logout</a>
+            {% else %}
+            <a href="{% url 'login' %}">Login</a>
+            <a href="{% url 'signup' %}">Signup</a>
+            {% endif %}
+          </div>
+        </div>
         <form method="post">
           {% csrf_token %} {{ form.url }}
           <button type="submit">shorten</button>
