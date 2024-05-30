@@ -28,6 +28,7 @@ def redirect_view(request, short_code):
 	Click.objects.create(link=link)
 	return redirect(link.url)
 
+@login_required
 def stats_view(request, short_code):
 	link_id = base62_decode(short_code)
 	link = get_object_or_404(Link, pk=link_id)

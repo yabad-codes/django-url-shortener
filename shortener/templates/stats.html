@@ -18,6 +18,11 @@
     <title>Stats</title>
   </head>
   <body>
+    <input
+      id="url-link{{ link.short_code }}"
+      hidden
+      value="http://localhost:8000/home/v/{{ link.short_code }}"
+    />
     <div class="container">
       <div class="url-add">
         <div class="header">
@@ -39,7 +44,12 @@
             </a>
             <div class="view-copy">
               <button class="views">{{ link.views_count }} views</button>
-              <button href="">copy</button>
+              <button
+                id="copy-btn{{ link.short_code }}"
+                onclick="clipboard('{{ link.short_code }}')"
+              >
+                copy
+              </button>
             </div>
           </div>
           <h1 class="url-title">{{ link.url }}</h1>
@@ -81,5 +91,6 @@
         </div>
       </div>
     </div>
+    <script src="{% static 'app.js' %}"></script>
   </body>
 </html>
